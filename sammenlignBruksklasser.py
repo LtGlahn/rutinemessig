@@ -28,12 +28,12 @@ if __name__ == '__main__':
     bkdata = []
     for objType in objTyper: 
         sok = nvdbapiv3.nvdbFagdata( objType )
-        sok.filter( {'kommune' : 5001 })
+        # sok.filter( {'kommune' : 5001 })
         temp = sok.to_records()
         bkdata.append( temp )
 
 
-    vegnettSOK = nvdbapiv3.nvdbVegnett( filter={'kommune' : 5001, 
+    vegnettSOK = nvdbapiv3.nvdbVegnett( filter={ # 'kommune' : 5001, 
                                             'trafikantgruppe' : 'K', 'veglenketype' : 'hoved,konnektering', 
                                             'vegsystemreferanse' : 'E,R,F,K'}  )
 
