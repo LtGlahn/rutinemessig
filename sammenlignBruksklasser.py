@@ -13,6 +13,8 @@ import pickle
 if __name__ == '__main__': 
 
     t0 = datetime.now()
+    outputdir = ''
+    outputdir = '/var/www/html/nvdbdata/bruksklasse/'
 
     uoffisiell = False 
     if uoffisiell == True: 
@@ -125,14 +127,14 @@ if __name__ == '__main__':
                                 ]  )
 
     mineKolonner = vegnettCol + bruksklasseCol + vegnettCol2
-    nvdbgeotricks.skrivexcel( 'bruksklasseOffisiell_analyse.xlsx', [ statistikk, avvik[mineKolonner], 
+    nvdbgeotricks.skrivexcel( outputdir + 'bruksklasseOffisiell_analyse.xlsx', [ statistikk, avvik[mineKolonner], 
                                                                avvik_fullutstrekning[ mineKolonner ],
                                                                hull[ mineKolonner ],  metadata ], 
                              sheet_nameListe=[ 'Statistikk', 'Avvik', 'Avvik og hull', 'Hull', 'metadata' ])
     
     joined3[mineKolonner].to_file( 'AllOverlapp.gpkg', layer='Overlapp vegnett og BK offisiell', driver='GPKG')
 
-    gpkgFil = 'bruksklasseOffisiell_analyse.gpkg'
+    gpkgFil = outputdir + 'bruksklasseOffisiell_analyse.gpkg'
     avvik[mineKolonner].to_file( gpkgFil, layer='Avvik', driver='GPKG')
     avvik_fullutstrekning[mineKolonner].to_file( gpkgFil, layer='Avvik og hull', driver='GPKG')
     hull[mineKolonner].to_file( gpkgFil, layer='Hull', driver='GPKG')
