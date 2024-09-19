@@ -42,6 +42,8 @@ if __name__ == '__main__':
 
     vegnett = pd.DataFrame( vegnettSOK.to_records() )
     vegnett['Gatenavn'] = vegnett['gate'].apply( lambda x : x['navn'] if isinstance( x, dict) and 'navn' in x else '' )    
+    # fjerner fiktiv veg
+    vegnett = vegnett[ vegnett['fase'] != 'F'].copy()
     vegnett = gpd.GeoDataFrame( vegnett, geometry=vegnett['geometri'].apply( wkt.loads), crs=5973 )
     vegnettCol = [ 'fylke', 'kommune', 'vegkategori', 'fase', 'nummer', 'vref',  
                   'Gatenavn', 'feltoversikt', 'typeVeg', 'type' ]
